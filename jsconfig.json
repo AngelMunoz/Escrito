@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "target": "ES2015",
+        "lib": [
+            "WebWorker"
+        ]
+    },
+    "include": [
+        "sw"
+    ],
+    "typeAcquisition": {
+        "enable": true,
+        "include": [
+            "workbox"
+        ]
+    }
+}

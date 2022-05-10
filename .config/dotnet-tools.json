@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "perla": {
+      "version": "0.22.0",
+      "commands": [
+        "perla"
+      ]
+    },
+    "fantomas-tool": {
+      "version": "4.7.9",
+      "commands": [
+        "fantomas"
+      ]
+    },
+    "fable": {
+      "version": "3.7.11",
+      "commands": [
+        "fable"
+      ]
+    }
+  }
+}

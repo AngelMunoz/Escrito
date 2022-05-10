@@ -1,0 +1,9 @@
+{
+    "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+    "name": "Escrito",
+    "start_url": "/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "description": "Escrito is a simple website that allows you to write \"holes\" in sentences so you can give them for a child to fill out",
+    "theme_color": "#fff"
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Perla + Fable.Lit</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="fable.ico" />
+    <link rel="manifest" href="app.webmanifest" crossorigin="use-credentials" />
+    <script
+      async
+      src="https://ga.jspm.io/npm:es-module-shims@1.0.0/dist/es-module-shims.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div id="lit-app"></div>
+    <script>
+      if ("serviceWorker" in navigator) {
+        // Use the window load event to keep the page load performant
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("sw.js")
+            .catch(console.warn)
+            .then(console.log);
+        });
+      }
+    </script>
+    <script data-entry-point src="./src/Main.fs.js" type="module"></script>
+  </body>
+</html>

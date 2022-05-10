@@ -1,0 +1,25 @@
+{
+  "$schema": "https://raw.githubusercontent.com/AngelMunoz/Perla/v0.22.0/perla.schema.json",
+  "index": "./index.html",
+  "devServer": {
+    "mountDirectories": {
+      "./src": "/src",
+      "./sw": ""
+    }
+  },
+  "build": {
+    "copyPaths": {
+      "includes": [
+        "./sw/sw.js -> ./sw.js",
+        "./sw/app.webmanifest -> ./app.webmanifest"
+      ]
+    }
+  },
+  "fable": {
+    "autoStart": true,
+    "project": "./src/App.fsproj"
+  },
+  "packages": {
+    "lit": "https://cdn.skypack.dev/pin/lit@v2.2.3-IwwYkJyh70OoYX9M4m5k/mode=imports,min/optimized/lit.js"
+  }
+}
