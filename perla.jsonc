@@ -11,7 +11,8 @@
     "copyPaths": {
       "includes": [
         "./sw/sw.js -> ./sw.js",
-        "./sw/app.webmanifest -> ./app.webmanifest"
+        "./sw/app.webmanifest -> ./app.webmanifest",
+        "./sw/toaster.js -> ./toaster.js"
       ]
     }
   },

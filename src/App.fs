@@ -7,28 +7,23 @@ open Types
 open Components
 open Browser.Dom
 open Pages.Home
-open Pages.Notes
+open Events
+
+
 
 [<HookComponent>]
 let private app () =
-  let state, setState = Hook.useState Page.Home
+    let state, setState = Hook.useState Page.Home
 
-  let onBackRequested _ = printfn "Back requested"
+    let getPage page =
+        match page with
+        | Page.Home -> Home()
 
-  let goToPage (ev: CustomEvent<Page>) =
-    let page = defaultArg ev.detail Page.Home
-    setState page
-
-  let getPage page =
-    match page with
-    | Page.Home -> Home()
-    | Page.Notes -> Notes()
-
-  html
-    $"""
-     <flit-navbar @go-back={onBackRequested} @go-to-page={goToPage}></flit-navbar>
+    html
+        $"""
     {getPage state}
+    <sl-button @click={fun _ -> Notifications.notify ("Olv")}>Notify</sl-button>
   """
 
 let start () =
-  Lit.render (document.querySelector "#lit-app") (app ())
+    Lit.render (document.querySelector "#lit-app") (app ())

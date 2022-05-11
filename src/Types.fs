@@ -13,7 +13,5 @@ let createCustomEvent name options : CustomEvent<_> = jsNative
 
 module Types =
 
-  [<RequireQualifiedAccess>]
-  type Page =
-    | Home
-    | Notes
+    [<RequireQualifiedAccess>]
+    type Page = | Home

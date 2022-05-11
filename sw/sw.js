@@ -17,6 +17,8 @@ const isPerlaDependency =
         || hostContains(url, "ga.jspm.io")
         || hostContains(url, "unkpg.com");
 
+
+
 routing.registerRoute(({ event, request, url }) => ["/"].includes(url.pathname), new strategies.StaleWhileRevalidate({ cacheName: "html" }));
 routing.registerRoute(({ event, request, url }) => url.pathname.includes("app.webmanifest"), new strategies.StaleWhileRevalidate({ cacheName: "manifest" }));
 
@@ -26,7 +28,7 @@ routing.registerRoute(
         && request.destination === 'script'
         && !isPerlaResouce(url)
         && !isPerlaDependency(url),
-    new strategies.StaleWhileRevalidate({ cacheName: 'scripts' })
+    new strategies.NetworkFirst({ cacheName: 'scripts' })
 );
 
 routing.registerRoute(

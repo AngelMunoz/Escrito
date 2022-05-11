@@ -8,23 +8,74 @@
     <link rel="manifest" href="app.webmanifest" crossorigin="use-credentials" />
     <script
       async
-      src="https://ga.jspm.io/npm:es-module-shims@1.0.0/dist/es-module-shims.js"
+      src="https://ga.jspm.io/npm:es-module-shims@1.5.4/dist/es-module-shims.js"
       crossorigin="anonymous"
     ></script>
+    <link
+      rel="stylesheet"
+      media="(prefers-color-scheme:light)"
+      href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.73/dist/themes/light.css"
+    />
+    <link
+      rel="stylesheet"
+      media="(prefers-color-scheme:dark)"
+      href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.73/dist/themes/dark.css"
+      onload="document.documentElement.classList.add('sl-theme-dark');"
+    />
   </head>
   <body>
     <div id="lit-app"></div>
-    <script>
+    <script type="module">
+      import { updatePrompt } from "./toaster.js";
+      import { Workbox } from "https://storage.googleapis.com/workbox-cdn/releases/6.4.1/workbox-window.prod.mjs";
+
       if ("serviceWorker" in navigator) {
-        // Use the window load event to keep the page load performant
-        window.addEventListener("load", () => {
-          navigator.serviceWorker
-            .register("sw.js")
-            .catch(console.warn)
-            .then(console.log);
+        const wb = new Workbox("/sw.js");
+        let registration;
+
+        const showSkipWaitingPrompt = async (event) => {
+          // Assuming the user accepted the update, set up a listener
+          // that will reload the page as soon as the previously waiting
+          // service worker has taken control.
+          wb.addEventListener("controlling", () => {
+            // At this point, reloading will ensure that the current
+            // tab is loaded under the control of the new service worker.
+            // Depending on your web app, you may want to auto-save or
+            // persist transient state before triggering the reload.
+            window.location.reload();
+          });
+
+          // When `event.wasWaitingBeforeRegister` is true, a previously
+          // updated service worker is still waiting.
+          // You may want to customize the UI prompt accordingly.
+
+          // This code assumes your app has a promptForUpdate() method,
+          // which returns true if the user wants to update.
+          // Implementing this is app-specific; some examples are:
+          // https://open-ui.org/components/alert.research or
+          // https://open-ui.org/components/toast.research
+          const updateAccepted = await updateWorkerPrompt(
+            "A new update is ready, update now?"
+          );
+          console.log(updateAccepted);
+          if (updateAccepted) {
+            wb.messageSkipWaiting();
+          }
+        };
+
+        // Add an event listener to detect when the registered
+        // service worker has installed but is waiting to activate.
+        wb.addEventListener("waiting", (event) => {
+          showSkipWaitingPrompt(event);
         });
+
+        wb.register();
       }
     </script>
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.73/dist/shoelace.js"
+    ></script>
     <script data-entry-point src="./src/Main.fs.js" type="module"></script>
   </body>
 </html>
