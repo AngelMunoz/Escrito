@@ -19,11 +19,7 @@ let private app () =
         match page with
         | Page.Home -> Home()
 
-    html
-        $"""
-    {getPage state}
-    <sl-button @click={fun _ -> Notifications.notify ("Olv")}>Notify</sl-button>
-  """
+    html $"""{getPage state}"""
 
 let start () =
     Lit.render (document.querySelector "#lit-app") (app ())

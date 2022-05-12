@@ -1,8 +1,9 @@
-importScripts(
-    'https://storage.googleapis.com/workbox-cdn/releases/6.4.1/workbox-sw.js'
-);
+self.
+    importScripts(
+        'https://storage.googleapis.com/workbox-cdn/releases/6.5.2/workbox-sw.js'
+    );
 
-workbox.setConfig({ debug: true });
+workbox.setConfig();
 const { strategies, routing } = workbox;
 
 const pathEndsWith = (url, ext) => url?.pathname?.endsWith(ext);
@@ -19,8 +20,8 @@ const isPerlaDependency =
 
 
 
-routing.registerRoute(({ event, request, url }) => ["/"].includes(url.pathname), new strategies.StaleWhileRevalidate({ cacheName: "html" }));
-routing.registerRoute(({ event, request, url }) => url.pathname.includes("app.webmanifest"), new strategies.StaleWhileRevalidate({ cacheName: "manifest" }));
+routing.registerRoute(({ event, request, url }) => ["/"].includes(url.pathname), new strategies.NetworkFirst({ cacheName: "html" }));
+routing.registerRoute(({ event, request, url }) => url.pathname.includes("app.webmanifest"), new strategies.NetworkFirst({ cacheName: "manifest" }));
 
 routing.registerRoute(
     ({ event, request, url }) =>
@@ -43,5 +44,5 @@ routing.registerRoute(
 
 routing.registerRoute(
     ({ event, request, url }) => isGet(request) && request.destination === 'style',
-    new strategies.StaleWhileRevalidate({ cacheName: 'styles' })
+    new strategies.NetworkFirst({ cacheName: 'styles' })
 );
