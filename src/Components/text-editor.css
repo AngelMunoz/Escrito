@@ -1,0 +1,13 @@
+
+.es-text-panels section {
+    margin: 1em;
+}
+
+.es-text-nav {
+    display: inline-flex;
+    margin: auto;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    contain: content;
+}

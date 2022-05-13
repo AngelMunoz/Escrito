@@ -2,42 +2,32 @@
 module Components.Navbar
 
 open Lit
-open Browser.Types
-open Browser.Dom
 open Types
-open Fable.Core.JS
-open Fable.Core.JsInterop
+open Events
 
+let navigateTo page =
+    let cevt = createCustomEvent ("navigate-to", {| detail = page |})
 
-let mutable canUpdate = false
+    GlobalBus.dispatchEvent cevt
 
-[<LitElement("update-banner")>]
+[<LitElement("es-navbar")>]
 let private NavBar () =
 
-    let host = LitElement.init ()
-
-    let showPrompt () =
-        promise {
-            let alert = host.shadowRoot.querySelector ("sl-alert")
-            do! alert?show ()
-            return canUpdate
-        }
-
-    Hook.useEffectOnce (fun _ -> host?showUpdatePrompt <- showPrompt)
-
-    let updateShouldHide (willUpdate) =
-        canUpdate <- willUpdate
-        let alert = host.shadowRoot.querySelector ("sl-alert")
-        alert?hide ()
+    LitElement.init (fun config -> config.useShadowDom <- false)
+    |> ignore
 
     html
         $"""
-        <sl-alert closable>
-          An update is available, update now?
-          <sl-button-group>
-            <sl-button @click={fun _ -> updateShouldHide true}>Yes</sl-button>
-            <sl-button @click={fun _ -> updateShouldHide false}>No</sl-button>
-          </sl-button-group>
-        </sl-alert>"""
+        <sl-button-group>
+          <sl-button pill @click={fun _ -> navigateTo Page.Home}>
+            <sl-icon name="house-door"></sl-icon>
+            Home
+          </sl-button>
+          <sl-button pill @click={fun _ -> navigateTo Page.About}>
+            <sl-icon name="info-lg"></sl-icon>
+            About
+          </sl-button>
+        </sl-button-group>
+        """
 
 let register () = ()

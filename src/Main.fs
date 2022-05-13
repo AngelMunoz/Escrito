@@ -6,4 +6,5 @@ Fable.Core.JsInterop.importSideEffects "./styles.css"
 // register your custom elements here
 Counter.register ()
 Navbar.register ()
+TextEditor.register ()
 App.start ()

@@ -6,12 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Extensions.fs" />
     <Compile Include="Types.fs" />
+    <Compile Include="Extensions.fs" />
+    <Compile Include="Database.fs" />
     <Compile Include="Events.fs" />
+    <Compile Include="Components/Shared.fs" />
     <Compile Include="Components/Counter.fs" />
     <Compile Include="Components/Navbar.fs" />
+    <Compile Include="Components/TextEditor.fs" />
     <Compile Include="Home.fs" />
+    <Compile Include="About.fs" />
     <Compile Include="App.fs" />
     <Compile Include="Main.fs" />
   </ItemGroup>
@@ -19,6 +23,7 @@
   <ItemGroup>
     <PackageReference Include="Fable.Lit" Version="1.4.1" />
     <PackageReference Include="Fable.Browser.Event" Version="1.5.0" />
+    <PackageReference Include="Fable.Browser.MediaQueryList" Version="1.1.1" />
   </ItemGroup>
 
 </Project>
