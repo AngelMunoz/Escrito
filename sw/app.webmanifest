@@ -5,5 +5,8 @@
     "display": "standalone",
     "orientation": "portrait",
     "description": "Escrito is a simple website that allows you to write \"holes\" in sentences so you can give them for a child to fill out",
-    "theme_color": "#fff"
+    "theme_color": "#fff",
+    "background_color": "#fff",
+    "icons": [],
+    "screenshots": []
 }
